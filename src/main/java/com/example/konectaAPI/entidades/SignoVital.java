@@ -10,17 +10,17 @@ public class SignoVital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
-    @Column(name = "unidadMedida")
+    @Column(name = "unidadMedida", nullable = false)
     private Integer unidadMedida;
-    @Column(name = "maximoNormal")
+    @Column(name = "maximoNormal", nullable = false)
     private Double maximoNormal;
-    @Column(name = "minimoNormal")
+    @Column(name = "minimoNormal", nullable = false)
     private Double minimoNormal;
-    @Column(name = "fecha")
+    @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
 
     public SignoVital() {

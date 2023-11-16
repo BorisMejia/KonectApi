@@ -11,13 +11,13 @@ public class Examen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "nombreExamen")
+    @Column(name = "nombreExamen", nullable = false)
     private String nombreExamen;
-    @Column(name = "fechaExamen")
+    @Column(name = "fechaExamen", nullable = false)
     private LocalDateTime fechaExamen;
-    @Column(name = "imagenExamen")
+    @Column(name = "imagenExamen", nullable = false)
     private String imagenExamen;
 
     public Examen() {

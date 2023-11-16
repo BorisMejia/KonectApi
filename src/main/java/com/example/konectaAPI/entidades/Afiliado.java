@@ -25,7 +25,7 @@ public class Afiliado {
     private Integer ciudad;
     @Column(name = "telefono", length = 30, nullable = false)
     private String telefono;
-    @Column(name = "fechaNacimiento")
+    @Column(name = "fechaNacimiento", nullable = false)
     private LocalDate fechaNacimiento;
 
     public Afiliado() {
