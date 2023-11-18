@@ -6,6 +6,7 @@ import com.example.konectaAPI.repositorios.ExamenRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,15 @@ public class ExamenServicio
         }catch (Exception error)
         {
             throw new Exception(Utilidad.CONSULTAR_USUARIO.getMensaje());
+        }
+    }
+    public List<Examen> buscarTodosLosExamenes()throws Exception{
+        try {
+            List<Examen>listExamen = this.examenRepositorio.findAll();
+            return listExamen;
+
+        }catch (Exception error){
+            throw new Exception(Utilidad.CONSULTAR_TODOS_EXAMENES.getMensaje());
         }
     }
 

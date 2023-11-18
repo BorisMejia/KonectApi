@@ -5,6 +5,7 @@ import com.example.konectaAPI.repositorios.AfiliadoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,8 +44,39 @@ public class AfiliadoServicio {
     }
 
     //Consultar afiliados
+    public List<Afiliado> buscarTodosLosAfiliados()throws Exception{
+        try {
+           List<Afiliado>listaConsultada = this.afiliadoRepositorio.findAll();
+           return listaConsultada;
+
+        }catch (Exception error)
+        {
+            throw new Exception(Utilidad.CONSULTAR_TODOS_AFILIADOS.getMensaje());
+        }
+    }
 
     //Modificar datos afiliado
+    public Afiliado editarAfiliado(Integer id, Afiliado afiliado) throws Exception{
+        try {
+            Optional<Afiliado> afiliadoBuscado = this.afiliadoRepositorio.findById(id);
+            if(afiliadoBuscado.isPresent()){
+               /* Afiliado afiliadoEditado=this.afiliadoRepositorio.save(afiliado);
+                return afiliadoEditado;
+                CAMBIAR TODO
+                */
+                Afiliado afiliadoExistente = afiliadoBuscado.get();
+                afiliadoExistente.setCorreo(afiliado.getCorreo());
+                afiliadoExistente.setDepartmento(afiliado.getDepartmento());
+                Afiliado afiliadoModificado = this.afiliadoRepositorio.save(afiliadoExistente);
+                return afiliadoModificado;
+            }else {
+                
+                throw new Exception("Afiliado no encontrado");
+            }
+        }catch (Exception error){
+            throw new Exception(Utilidad.EDITAR_UN_AFILIADO.getMensaje());
+        }
+    }
 
     //Borrar afiliado
 }

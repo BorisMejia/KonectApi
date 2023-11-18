@@ -6,6 +6,7 @@ import com.example.konectaAPI.repositorios.SignoVitalRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,14 @@ public class SignoVitalServicio
         }catch (Exception error)
         {
             throw new Exception(Utilidad.CONSULTAR_USUARIO.getMensaje());
+        }
+    }
+    public List<SignoVital> buscarTodosLosSignoVital()throws Exception{
+        try {
+           List<SignoVital>listSignoVital = this.signoVitalRepositorio.findAll();
+           return listSignoVital;
+        }catch (Exception error){
+            throw new Exception(Utilidad.CONSULTAR_TODOS_SIGNOVITAL.getMensaje());
         }
     }
 }
