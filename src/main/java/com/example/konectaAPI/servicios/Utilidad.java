@@ -10,7 +10,11 @@ public enum Utilidad
     CONSULTAR_TODOS_AFILIADOS("Error al consultar todos los afiliados"),
     CONSULTAR_TODOS_EXAMENES("Error al consultar todos los examenes"),
     CONSULTAR_TODOS_SIGNOVITAL("Error al consultar todos los signos vital"),
-    EDITAR_UN_AFILIADO("Error al editar un afiliado");
+    EDITAR_UN_AFILIADO("Error al editar un afiliado"),
+    EDITAR_UN_EXAMEN("Error al editar un examen"),
+    BORRAR_UN_AFILIADO("El afiliado no se encontro en la base de datos"),
+    BORRAR_UN_EXAMEN("El examen no se encontro en la base de datos"),
+    BORRAR_UN_SIGNO("El signo vital no se encontro en la base de datos");
     private String mensaje;
 
     Utilidad(String mensaje) {

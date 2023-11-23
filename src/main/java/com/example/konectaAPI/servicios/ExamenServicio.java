@@ -1,10 +1,10 @@
 package com.example.konectaAPI.servicios;
 
-import com.example.konectaAPI.entidades.Afiliado;
 import com.example.konectaAPI.entidades.Examen;
 import com.example.konectaAPI.repositorios.ExamenRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +50,41 @@ public class ExamenServicio
         }catch (Exception error){
             throw new Exception(Utilidad.CONSULTAR_TODOS_EXAMENES.getMensaje());
         }
+    }
+    public Examen editarExamen(Integer id, Examen examen) throws Exception{
+        try {
+            Optional<Examen> examenBuscado = this.examenRepositorio.findById(id);
+            if(examenBuscado.isPresent()){
+               /* Afiliado afiliadoEditado=this.afiliadoRepositorio.save(afiliado);
+                return afiliadoEditado;
+                CAMBIAR TOD0
+                */
+                Examen examenExistente = examenBuscado.get();
+                examenExistente.setFechaExamen(examen.getFechaExamen());
+                examenExistente.setNombreExamen(examen.getNombreExamen());
+                Examen examenModificado = this.examenRepositorio.save(examenExistente);
+                return examenModificado;
+            }else {
+                throw new Exception("examen no encontrado");
+            }
+        }catch (Exception error){
+            throw new Exception(Utilidad.EDITAR_UN_AFILIADO.getMensaje());
+        }
+    }
+    public Boolean eliminarExamen(Integer id)throws Exception{
+        try {
+            Boolean examenEncontrado = this.examenRepositorio.existsById(id);
+            if(examenEncontrado){
+                this.examenRepositorio.deleteById(id);
+                return true;
+            }else {
+                throw new Exception(Utilidad.BORRAR_UN_EXAMEN.getMensaje());
+            }
+
+        }catch (Exception error){
+            throw new Exception("Error borrando el examen");
+        }
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.konectaAPI.servicios;
 
 import com.example.konectaAPI.entidades.Afiliado;
+import com.example.konectaAPI.entidades.Examen;
 import com.example.konectaAPI.entidades.SignoVital;
 import com.example.konectaAPI.repositorios.SignoVitalRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,40 @@ public class SignoVitalServicio
            return listSignoVital;
         }catch (Exception error){
             throw new Exception(Utilidad.CONSULTAR_TODOS_SIGNOVITAL.getMensaje());
+        }
+    }
+    public SignoVital editarSignoVital(Integer id, SignoVital signoVital) throws Exception{
+        try {
+            Optional<SignoVital> signoBuscado = this.signoVitalRepositorio.findById(id);
+            if(signoBuscado.isPresent()){
+               /* Afiliado afiliadoEditado=this.afiliadoRepositorio.save(afiliado);
+                return afiliadoEditado;
+                CAMBIAR TOD0
+                */
+                SignoVital signoExistente = signoBuscado.get();
+                signoExistente.setNombre(signoVital.getNombre());
+                signoExistente.setFecha(signoVital.getFecha());
+                SignoVital signoModificado = this.signoVitalRepositorio.save(signoExistente);
+                return signoModificado;
+            }else {
+                throw new Exception("examen no encontrado");
+            }
+        }catch (Exception error){
+            throw new Exception(Utilidad.EDITAR_UN_AFILIADO.getMensaje());
+        }
+    }
+    public Boolean eliminarSignoVital (Integer id) throws Exception{
+        try {
+            Boolean signoVitalEncontrado = this.signoVitalRepositorio.existsById(id);
+            if(signoVitalEncontrado){
+                this.signoVitalRepositorio.deleteById(id);
+                return true;
+            }else {
+                throw new Exception(Utilidad.BORRAR_UN_SIGNO.getMensaje());
+            }
+
+        }catch (Exception error){
+            throw new Exception("Error borrando el signo vital");
         }
     }
 }

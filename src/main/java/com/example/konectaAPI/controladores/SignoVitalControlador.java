@@ -55,4 +55,15 @@ public class SignoVitalControlador {
                     .body(null);
         }
     }
+    public ResponseEntity<?> eliminarSigno(@PathVariable Integer id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.signoVitalServicio.eliminarSignoVital(id));
+        }catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
+    }
 }

@@ -54,4 +54,15 @@ public class ExamenControlador {
                     .body(null);
         }
     }
+    public ResponseEntity<?> eliminarExamen(@PathVariable Integer id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.examenServicio.eliminarExamen(id));
+        }catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
+    }
 }

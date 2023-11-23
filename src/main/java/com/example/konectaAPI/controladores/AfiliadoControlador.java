@@ -31,7 +31,7 @@ public class AfiliadoControlador {
     }
 
     //buscar afiliado
-    @GetMapping("id")
+    @GetMapping("/{id}")
     public ResponseEntity<?> buscarAfiliado(@PathVariable Integer id) {
         try {
             Afiliado respuestaServicio = this.afiliadoServicio.consultarAfiliado(id);
@@ -70,4 +70,16 @@ public class AfiliadoControlador {
                     .body(null);
         }
     }
+    public ResponseEntity<?> eliminarAfiliado(@PathVariable Integer id){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.afiliadoServicio.retirarAfiliado(id));
+        }catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
+    }
+
 }
